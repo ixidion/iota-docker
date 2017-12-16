@@ -1,0 +1,38 @@
+version: '3'
+services:
+  iri:
+    image: bluedigits/iota-node
+    volumes:
+      - iota_data:/iri/data:rw
+      - iota_neighbors:/iri/conf:rw
+    ports:
+      - "14265:14265/tcp"
+      - "14600:14600/udp"
+      - "15600:15600/tcp"
+    networks:
+      - iotanet
+    environment:
+      - API_PORT=14265
+      - UDP_PORT=14600
+      - TCP_PORT=15600
+  iota-peermanager:
+    image: ixidion/ipm
+    volumes:
+      - ipm:/home/ipm:rw
+    ports:
+      - "22888:8888/tcp"
+    networks:
+      - iotanet
+    environment:
+      - API_PORT=14265
+      - REFRESH=10s
+      - IOTA_HOST=iri
+    links:
+      - iri:iri
+networks:
+  iotanet:
+
+volumes:
+  iota_data:
+  iota_neighbors:
+  ipm:
