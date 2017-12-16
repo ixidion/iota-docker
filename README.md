@@ -17,3 +17,6 @@ IOTA Peermanager [Dockerhub](https://hub.docker.com/r/ixidion/ipm/) [Github](htt
 1. Execute install_docker.sh
 
 If you have problems with pip, you have to adjust `pip_package_name` variable in `ansible/install_docker.yml`
+
+## How to setup IOTA without Docker
+If Docker is not an option for you and want to install IOTA directly on bare metal or a VPS, then you should definitely checkout [IRI Playbook](https://github.com/nuriel77/iri-playbook).
