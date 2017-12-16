@@ -4,6 +4,6 @@
     dest: /tmp/docker-compose.yml
 
 - name: Run docker-compose
-  shell: docker-compose up -d
+  shell: docker-compose -p iotadist up -d
   args:
     chdir: /tmp/
