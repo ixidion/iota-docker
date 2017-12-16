@@ -20,7 +20,7 @@ services:
     volumes:
       - ipm:/home/ipm:rw
     ports:
-      - "22888:8888/tcp"
+      - "127.0.0.1:8888:8888/tcp"
     networks:
       - iotanet
     environment:
