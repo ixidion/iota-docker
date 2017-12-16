@@ -1,0 +1,9 @@
+- name: copy docker-compose.yml to remote host
+  template:
+    src: templates/docker-compose.yml.j2
+    dest: /tmp/docker-compose.yml
+
+- name: Run docker-compose
+  shell: docker-compose up -d
+  args:
+    chdir: /tmp/

@@ -1,9 +1,10 @@
 - hosts: dockerhosts
 
   vars:
+    pip_package_name: python3-pip
     pip_install_packages:
       - name: docker
 
   roles:
-    - geerlingguy.pip
+    - ansible-role-pip
     - geerlingguy.docker

@@ -1,2 +1,7 @@
 [dockerhosts]
-<hostname> ansible_user=<user> ansible_become=true
+# Works for Ubuntu
+<hostname> ansible_user=<user> ansible_become=true ansible_python_interpreter=/usr/bin/python3
+
+[iotanodes]
+# Works for Ubuntu
+<hostname> ansible_user=<user> ansible_become=true ansible_python_interpreter=/usr/bin/python3

@@ -1,0 +1,6 @@
+# From Github - Patched Version to avoid Pip3 error message
+# Should be changed later back
+# see https://github.com/geerlingguy/ansible-role-pip/issues/6
+- src: https://github.com/ixidion/ansible-role-pip
+
+- src: geerlingguy.docker
