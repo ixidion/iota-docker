@@ -1,1 +1,4 @@
 iota_data_volume: iota_data
+iota_cron_filter: "{{ project_name }}_iri"
+iota_restart: false
+iota_restart_every_x_hours: 6

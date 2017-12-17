@@ -30,3 +30,10 @@
   shell: docker-compose -p {{ project_name }} up -d
   args:
     chdir: /tmp/
+
+- name: Setup a crontab to restart iri every x hours
+  cron:
+    name: Restart IRI
+    job: "docker container restart $(docker ps --filter \"name={{ iota_cron_filter }}\" -q)"
+    hour: "*/{{ iota_restart_every_x_hours }}"
+  when: iota_restart == true
