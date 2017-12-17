@@ -16,6 +16,14 @@ IOTA Peermanager [Dockerhub](https://hub.docker.com/r/ixidion/ipm/) [Github](htt
 1. Adjust hosts.example and rename it to hosts
 1. Execute install_docker.sh
 
+```
+usage: install_docker.sh [OPTIONS]
+      --install-docker       installs docker daemon on a remote host with Ansible
+      --download-db          trigger download and renew of DB from http://iota.partners
+      --compose              runs docker-compose to setup/renew the container
+      --help                 print this help
+```
+
 If you have problems with pip, you have to adjust `pip_package_name` variable in `ansible/install_docker.yml`
 
 ## How to setup IOTA without Docker

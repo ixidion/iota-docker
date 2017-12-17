@@ -1,3 +1,6 @@
 - hosts: iotanodes
+  vars:
+    project_name: iotadist
+    iota_data_volume: iota_data
   roles:
     - docker-compose

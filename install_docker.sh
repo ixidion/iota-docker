@@ -1,7 +1,71 @@
-#!/usr/bin/env bash
-# Wonderful ASCII-Art taken from https://github.com/nuriel77/iri-playbook which is an installer for IOTA without docker.
+#!/bin/bash
+POSITIONAL=()
+while [[ $# -gt 0 ]]
+do
+key="$1"
+
+case $key in
+    --install-docker)
+    INSTALL=YES
+    shift # past argument
+    ;;
+    --download-db)
+    CREATE_DB=YES
+    shift # past argument
+    ;;
+    --compose)
+    COMPOSE=YES
+    shift # past argument
+    ;;
+    --easteregg)
+    EASTEREGG=YES
+    shift # past argument
+    ;;
+    --help)
+    HELP=YES
+    shift # past argument
+    ;;
+    *)    # unknown option
+    POSITIONAL+=("$1") # save it in an array for later
+    shift # past argument
+    ;;
+esac
+done
+
+set -- "${POSITIONAL[@]}" # restore positional parameters
+
+if [ "$HELP" == YES ]; then
+cat <<'EOF'
+  usage: install_docker.sh [OPTIONS]
+        --install-docker       installs docker daemon on a remote host with Ansible
+        --download-db          trigger download and renew of DB from http://iota.partners
+        --compose              runs docker-compose to setup/renew the container
+        --help                 print this help
+EOF
+fi
+
+if [ "$INSTALL" == YES ]; then
+    echo "Installing docker."
+    ansible-playbook ansible/install_docker.yml --ask-become-pass -i ansible/hosts
+fi
+
+if [ "$CREATE_DB" == YES ]; then
+    SETUPDB="true"
+else
+    SETUPDB="false"
+fi
+
+if [ "$COMPOSE" == YES ]; then
+    echo "Setting up Docker container. Database Download: $SETUPDB"
+    ansible-playbook ansible/run_docker-compose.yml --ask-become-pass -i ansible/hosts -e setupdb=$SETUPDB
+fi
+
+
+if [ "$EASTEREGG" == YES ]; then
 clear
 cat <<'EOF'
+Wonderful ASCII-Art taken from https://github.com/nuriel77/iri-playbook which is an installer for IOTA without docker.
+
                                                                    .odNMMmy:
                                                                    /MMMMMMMMMy
                                                                   `NMMMMMMMMMM:
@@ -52,28 +116,4 @@ mMMMMMMMMMM:            dMMd   ommd:     -+o/.              .NMMMMy      -mMMMN+
                                     `--.             -ymMMNh/
 
 EOF
-
-echo "Welcome this script sets an IOTA node and monitoring tools in a docker environment."
-echo "This script is going to install Docker, IOTA full node and Tools."
-read -p "Do you wish to proceed? [y/N] " yn
-if echo "$yn" | grep -v -iq "^y"; then
-    echo Cancelled
-    exit 1
 fi
-
-# Exit if ansible is not installed
-command -v ansible >/dev/null 2>&1 || { echo >&2 "I require ansible but it's not installed.  Aborting. Please install Ansible Development Version http://docs.ansible.com/ansible/latest/intro_installation.html#latest-releases-via-pip"; exit 1; }
-
-read -p "Do you wish to install docker? [y/N] " yn
-if echo "$yn" | grep -v -iq "^n"; then
-    echo "Installing docker."
-    ansible-playbook ansible/install_docker.yml --ask-become-pass -i ansible/hosts
-fi
-
-read -p "Do you wish to run docker-compose to setup container? [y/N] " yn
-if echo "$yn" | grep -v -iq "^n"; then
-    echo "Setting up Docker container."
-    ansible-playbook ansible/run_docker-compose.yml --ask-become-pass -i ansible/hosts
-fi
-
-echo "Install finished."

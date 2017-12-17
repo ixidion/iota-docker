@@ -3,7 +3,24 @@
     src: templates/docker-compose.yml.j2
     dest: /tmp/docker-compose.yml
 
+- name: Run docker-compose stop
+  shell: docker-compose stop
+  args:
+    chdir: /tmp/
+  when: setupdb == "true"
+
+# - name: Download current Mainnet DB of IOTA
+#   get_url:
+#     url: http://db.iota.partners/IOTA.partners-mainnetdb.tar.gz
+#     dest: /tmp/
+#   when: setupdb == "true"
+
+- name: Extract Tarball
+  shell: tar xfz /tmp/IOTA.partners-mainnetdb.tar.gz -C /var/lib/docker/volumes/{{ project_name }}_iota_data/_data/mainnetdb/
+  when: setupdb == "true"
+  become: true
+
 - name: Run docker-compose
-  shell: docker-compose -p iotadist up -d
+  shell: docker-compose -p {{ project_name }} up -d
   args:
     chdir: /tmp/
