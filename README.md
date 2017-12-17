@@ -20,6 +20,7 @@ IOTA Peermanager [Dockerhub](https://hub.docker.com/r/ixidion/ipm/) [Github](htt
 usage: install_docker.sh [OPTIONS]
       --install-docker       installs docker daemon on a remote host with Ansible
       --download-db          trigger download and renew of DB from http://iota.partners
+      --extract-only         extract tarball only. In case the download succeded, but not the extraction.
       --compose              runs docker-compose to setup/renew the container
       --help                 print this help
 ```

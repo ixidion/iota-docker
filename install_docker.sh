@@ -17,6 +17,10 @@ case $key in
     COMPOSE=YES
     shift # past argument
     ;;
+    --extract-only)
+    EXTRACT_ONLY=YES
+    shift # past argument
+    ;;
     --easteregg)
     EASTEREGG=YES
     shift # past argument
@@ -39,6 +43,7 @@ cat <<'EOF'
   usage: install_docker.sh [OPTIONS]
         --install-docker       installs docker daemon on a remote host with Ansible
         --download-db          trigger download and renew of DB from http://iota.partners
+        --extract-only         extract tarball only. In case the download succeded, but not the extraction.
         --compose              runs docker-compose to setup/renew the container
         --help                 print this help
 EOF
@@ -55,9 +60,15 @@ else
     SETUPDB="false"
 fi
 
+if [ "$EXTRACT_ONLY" == YES ]; then
+    SKIP_DB_DL="true"
+else
+    SKIP_DB_DL="false"
+fi
+
 if [ "$COMPOSE" == YES ]; then
     echo "Setting up Docker container. Database Download: $SETUPDB"
-    ansible-playbook ansible/run_docker-compose.yml --ask-become-pass -i ansible/hosts -e setupdb=$SETUPDB
+    ansible-playbook ansible/run_docker-compose.yml --ask-become-pass -i ansible/hosts -e setupdb=$SETUPDB -e skipdbdl=$SKIP_DB_DL
 fi
 
 
