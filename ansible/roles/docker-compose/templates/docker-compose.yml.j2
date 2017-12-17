@@ -15,6 +15,7 @@ services:
       - API_PORT=14265
       - UDP_PORT=14600
       - TCP_PORT=15600
+  user: {{ iri_user }}
   iota-peermanager:
     image: ixidion/ipm
     volumes:
@@ -29,6 +30,7 @@ services:
       - IOTA_HOST=iri
     links:
       - iri:iri
+    user: {{ ipm_user }}
 networks:
   iotanet:
 
