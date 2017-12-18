@@ -1,3 +1,5 @@
+- import_tasks: nginx.yml
+
 - name: copy docker-compose.yml to remote host
   template:
     src: templates/docker-compose.yml.j2
@@ -16,12 +18,12 @@
   when: setupdb == "true" and skipdbdl != "true"
 
 - name: Extract Tarball
-  shell: tar xfz /tmp/IOTA.partners-mainnetdb.tar.gz -C /var/lib/docker/volumes/{{ project_name }}_iota_data/_data/mainnetdb/
+  shell: tar xfz /tmp/IOTA.partners-mainnetdb.tar.gz -C /var/lib/docker/volumes/{{ project_name }}_{{ iota_data_volume }}/_data/mainnetdb/
   when: setupdb == "true"
 
 - name: Change/Fix Ownership
   file:
-    path: /var/lib/docker/volumes/{{ project_name }}_iota_data/_data/mainnetdb/
+    path: /var/lib/docker/volumes/{{ project_name }}_{{ iota_data_volume }}/_data/mainnetdb/
     owner: root
     group: root
     recurse: true

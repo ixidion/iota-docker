@@ -27,8 +27,15 @@ services:
       - API_PORT=14265
       - REFRESH=10s
       - IOTA_HOST=iri
-    links:
-      - iri:iri
+  ipm-nginx:
+    image: nginx:latest
+    volumes:
+      - nginx_vol:/etc/nginx/:ro
+    ports:
+      - 80:80
+    networks:
+      - iotanet
+
 networks:
   iotanet:
 
@@ -36,3 +43,4 @@ volumes:
   {{ iota_data_volume }}:
   iota_neighbors:
   ipm:
+  {{ nginx_volume }}:

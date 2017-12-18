@@ -31,10 +31,15 @@ case $key in
     ;;
     *)    # unknown option
     POSITIONAL+=("$1") # save it in an array for later
+    HELP=YES
     shift # past argument
     ;;
 esac
 done
+
+if [ $# == 0 ]; then
+  HELP=YES
+fi
 
 set -- "${POSITIONAL[@]}" # restore positional parameters
 
