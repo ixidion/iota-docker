@@ -1,0 +1,29 @@
+- name: Create IRI container
+  docker_container:
+    name: "{{ docker_name_prefix }}_iri"
+    recreate: yes
+    image: "{{ docker_image_iri }}"
+    volumes:
+      - "{{ docker_name_prefix }}iri_data:/opt/iri/data"
+    ports:
+      - "14265:14265/tcp"
+      - "14600:14600/udp"
+      - "15600:15600/tcp"
+    networks:
+      - name: "{{ docker_network_name }}"
+
+- name: Create IOTA Peermanager container
+  docker_container:
+    name: "{{ docker_name_prefix }}_ipm"
+    recreate: yes
+    image: "{{ docker_image_ipm }}"
+    volumes:
+      - "{{ docker_name_prefix }}ipm:/home/ipm"
+    ports:
+      - "127.0.0.1:8888:8888/tcp"
+    networks:
+      - name: "{{ docker_network_name }}"
+    env:
+      API_PORT=14265
+      REFRESH=10s
+      IOTA_HOST=iri
