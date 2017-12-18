@@ -1,0 +1,15 @@
+# Create Docker Network
+- import_tasks: docker_network.yml
+
+# Create IRI Container
+- import_tasks: docker_iri.yml
+
+# Create IPM Container
+- import_tasks: docker_ipm.yml
+
+# Create NGINX Container for IPM
+
+# Create Nelson Container
+
+# Run
+- import_tasks: run_container.yml

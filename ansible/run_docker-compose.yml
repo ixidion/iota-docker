@@ -1,4 +1,4 @@
 - hosts: iotanodes
 
   roles:
-    - docker-compose
+    - docker-systemd
