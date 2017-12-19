@@ -1,6 +1,6 @@
 - name: Create IRI container
   docker_container:
-    name: "{{ docker_name_prefix }}_iri"
+    name: "{{ docker_name_prefix }}iri"
     recreate: yes
     image: "{{ docker_image_iri }}"
     volumes:
@@ -28,7 +28,7 @@
     env:
       API_PORT=14265
       REFRESH=10s
-      IOTA_HOST=iri
+      IOTA_HOST="{{ docker_name_prefix }}iri"
 
 - name: Create nginx container as reverse proxy for ipm
   docker_container:
