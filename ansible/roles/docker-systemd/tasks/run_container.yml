@@ -1,6 +1,6 @@
 - name: Create IRI container
   docker_container:
-    name: "{{ docker_name_prefix }}_iri"
+    name: "{{ docker_name_prefix }}iri"
     recreate: yes
     image: "{{ docker_image_iri }}"
     volumes:
@@ -14,7 +14,7 @@
 
 - name: Create IOTA Peermanager container
   docker_container:
-    name: "{{ docker_name_prefix }}_ipm"
+    name: "{{ docker_name_prefix }}ipm"
     recreate: yes
     image: "{{ docker_image_ipm }}"
     volumes:
