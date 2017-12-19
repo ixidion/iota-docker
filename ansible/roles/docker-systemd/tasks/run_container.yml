@@ -26,4 +26,4 @@
     env:
       API_PORT=14265
       REFRESH=10s
-      IOTA_HOST=iri
+      IOTA_HOST="{{ docker_name_prefix }}iri"
