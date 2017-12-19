@@ -8,6 +8,8 @@
 - import_tasks: docker_ipm.yml
 
 # Create NGINX Container for IPM
+- import_tasks: docker_nginx.yml
+
 
 # Create Nelson Container
 

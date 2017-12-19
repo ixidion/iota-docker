@@ -2,3 +2,4 @@ docker_name_prefix: iotadist_
 docker_network_name: "{{ docker_name_prefix }}iotanet"
 docker_image_iri: rootlogin/iota-iri
 docker_image_ipm: ixidion/ipm
+docker_image_nginx: nginx:mainline

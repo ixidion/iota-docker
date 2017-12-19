@@ -1,4 +1,8 @@
 #!/bin/bash
+if [[ $# == 0 ]]; then
+  HELP=YES
+fi
+
 POSITIONAL=()
 while [[ $# -gt 0 ]]
 do
@@ -36,10 +40,6 @@ case $key in
     ;;
 esac
 done
-
-if [ $# == 0 ]; then
-  HELP=YES
-fi
 
 set -- "${POSITIONAL[@]}" # restore positional parameters
 

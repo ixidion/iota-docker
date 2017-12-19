@@ -14,7 +14,7 @@
 
 - name: Create IOTA Peermanager container
   docker_container:
-    name: "{{ docker_name_prefix }}_ipm"
+    name: "{{ ipm_host }}"
     recreate: yes
     image: "{{ docker_image_ipm }}"
     volumes:
@@ -27,3 +27,15 @@
       API_PORT=14265
       REFRESH=10s
       IOTA_HOST=iri
+
+- name: Create nginx container as reverse proxy for ipm
+  docker_container:
+    name: "{{ docker_name_prefix }}_nginx"
+    recreate: yes
+    image: "{{ docker_image_nginx }}"
+    volumes:
+      - "{{ nginx_volume }}:/etc/nginx/"
+    ports:
+      - "80:80/tcp"
+    networks:
+      - name: "{{ docker_network_name }}"

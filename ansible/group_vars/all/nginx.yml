@@ -1,1 +1,1 @@
-nginx_volume: nginx_vol
+nginx_volume: "{{ docker_name_prefix }}nginx_conf"
