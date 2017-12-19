@@ -1,2 +1,3 @@
 hosts
 *.retry
+neighbors.yml

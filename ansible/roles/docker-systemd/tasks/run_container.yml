@@ -11,6 +11,8 @@
       - "15600:15600/tcp"
     networks:
       - name: "{{ docker_network_name }}"
+    env:
+      NEIGHBORS="{{ neighbors }}"
 
 - name: Create IOTA Peermanager container
   docker_container:
