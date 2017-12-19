@@ -51,6 +51,7 @@ fi
 
 if [ "$INSTALL" == YES ]; then
     echo "Installing docker."
+    ansible-galaxy install -r ansible/requirements.yml
     ansible-playbook ansible/install_docker.yml --ask-become-pass -i ansible/hosts
 fi
 
