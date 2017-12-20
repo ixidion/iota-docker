@@ -4,6 +4,6 @@ iota_restart: false
 iota_restart_every_x_hours: 6
 iota_host: "{{ docker_name_prefix }}iri"
 docker_image_iri: rootlogin/iota-iri
-iri_api_port: 14625
+iri_api_port: 14265
 iri_tcp_port: 15600
 iri_udp_port: 14600
