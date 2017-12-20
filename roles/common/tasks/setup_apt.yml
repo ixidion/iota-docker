@@ -1,0 +1,15 @@
+- name: Update all packages
+  apt:
+    upgrade: dist
+
+- name: Ensure depdencies are installed
+  apt:
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - jq
+    - ufw
+    - lsof
+    - curl
+    - pv
+    - python3-pip

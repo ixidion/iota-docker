@@ -1,3 +1,0 @@
-nginx_volume: "{{ docker_name_prefix }}nginx_conf"
-nginx_image: nginx:mainline
-nginx_host: "{{ docker_name_prefix }}nginx"

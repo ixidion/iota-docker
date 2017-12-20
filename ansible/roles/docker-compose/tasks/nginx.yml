@@ -1,4 +1,0 @@
-- name: copy nginx.conf
-  template:
-    src: templates/nginx.conf.j2
-    dest: /var/lib/docker/volumes/{{ project_name }}_{{ nginx_volume }}/_data/nginx.conf

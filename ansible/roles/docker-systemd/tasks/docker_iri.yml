@@ -1,7 +1,0 @@
-- name: Create an IRI data volume
-  docker_volume:
-    name: "{{ iri_data_volume }}"
-
-- name: Pull IRI image
-  docker_image:
-    name: "{{ iri_image }}"

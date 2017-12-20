@@ -1,0 +1,38 @@
+- name: Create an IRI data volume
+  docker_volume:
+    name: "{{ iri_data_volume }}"
+
+- import_tasks: database.yml
+  tags:
+    - download_db
+
+- name: Pull IRI image
+  docker_image:
+    name: "{{ iri_image }}"
+
+- name: Create IRI container
+  docker_container:
+    name: "{{ iri_hostname }}"
+    recreate: yes
+    image: "{{ iri_image }}"
+    volumes:
+      - "{{ iri_data_volume }}:/opt/iri/data"
+    ports:
+    # WARNING: Do not expose iri_api_port to public! There is no limitation for API calls in place.
+      - "127.0.0.1:{{ iri_api_port }}:14265/tcp"
+      - "{{ iri_udp_port }}:14600/udp"
+      - "{{ iri_tcp_port }}:15600/tcp"
+    networks:
+      - name: "{{ docker_network_name }}"
+    env:
+      NEIGHBORS="{{ iri_neighbors }}"
+      JAVA_OPTIONS="{{ iri_java_options }}"
+      REMOTE_API_LIMIT=""
+
+# Needs to be replaced with systemd
+# - name: Setup a crontab to restart iri every x hours
+#   cron:
+#     name: Restart IRI
+#     job: "docker container restart $(docker ps --filter \"name={{ iri_hostname }}\" -q)"
+#     hour: "*/{{ iri_cron_every_x_hours }}"
+#   when: iri_cron_active == true

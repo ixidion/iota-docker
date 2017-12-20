@@ -1,0 +1,7 @@
+- src: geerlingguy.pip
+  version: 1.2.0
+
+- src: geerlingguy.docker
+  version: 2.1.0
+
+- src: ttsak.upgrade_reboot

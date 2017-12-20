@@ -1,0 +1,20 @@
+- name: Install epel-release
+  yum: state=latest name=epel-release
+
+- name: upgrade all packages
+  yum:
+    name: '*'
+    state: latest
+
+- name: Install some packages
+  yum: state=latest name={{ item }}
+  with_items:
+    - policycoreutils-python
+    - firewalld
+    - curl
+    - wget
+    - screen
+    - lsof
+    - jq
+    - pv
+    - python-pip

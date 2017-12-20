@@ -1,7 +1,0 @@
-- name: Create an IPM data volume
-  docker_volume:
-    name: "{{ docker_name_prefix }}ipm"
-
-- name: Pull IRI image
-  docker_image:
-    name: "{{ ipm_image }}"

@@ -1,0 +1,14 @@
+iri_data_volume: "{{ docker_name_prefix }}iri_data"
+iri_cron_active: false
+iri_cron_every_x_hours: 6
+iri_hostname: "{{ docker_name_prefix }}iri"
+iri_image: rootlogin/iota-iri
+iri_api_port: 14265
+iri_tcp_port: 15600
+iri_udp_port: 14600
+iri_user: 1600
+iri_group: 1600
+iri_db_filename: IOTA.partners-mainnetdb.tar.gz
+iri_db_url: "http://db.iota.partners/{{ iri_db_filename }}"
+iri_db_folder: "{{ docker_volume_path }}{{ iri_data_volume }}/_data/mainnetdb"
+iri_java_options: "-XX:+DisableAttachMechanism -XX:+HeapDumpOnOutOfMemoryError -XX:+UnlockExperimentalVMOptions -XX:+UseCGroupMemoryLimitForHeap {{ extiri_java_options }}"

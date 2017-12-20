@@ -1,0 +1,3 @@
+docker_name_prefix: iotadist_
+docker_network_name: "{{ docker_name_prefix }}iotanet"
+docker_volume_path: "/var/lib/docker/volumes/"

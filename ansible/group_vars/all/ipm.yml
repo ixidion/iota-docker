@@ -1,3 +1,0 @@
-ipm_image: ixidion/ipm
-ipm_host: "{{ docker_name_prefix }}_ipm"
-ipm_port: 8888

@@ -1,0 +1,29 @@
+- name: Create an nelson conf volume
+  docker_volume:
+    name: "{{ nelson_volume }}"
+
+- name: Pull Nelson image
+  docker_image:
+    name: "{{ nelson_image }}"
+
+- name: copy config.ini
+  template:
+    src: templates/config.ini.j2
+    dest: "{{ docker_volume_path }}{{ nelson_volume }}/_data/config.ini"
+
+- name: Create nelson container for managing peers
+  docker_container:
+    name: "{{ nelson_hostname }}"
+    recreate: yes
+    image: "{{ nelson_image }}"
+    volumes:
+      - "{{ nelson_volume }}:/etc/nelson"
+    ports:
+      - "{{ nelson_tcp_port }}:16600"
+      - "{{ nelson_api_port }}:18600"
+    networks:
+      - name: "{{ docker_network_name }}"
+    env:
+      NELSON_CONFIG="{{ nelson_configdir }}/config.ini"
+  tags:
+    - restart_nelson

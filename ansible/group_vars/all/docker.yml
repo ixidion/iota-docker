@@ -1,2 +1,0 @@
-docker_name_prefix: iotadist_
-docker_network_name: "{{ docker_name_prefix }}iotanet"

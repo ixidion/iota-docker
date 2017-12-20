@@ -1,0 +1,4 @@
+ipm_image: ixidion/ipm
+ipm_hostname: "{{ docker_name_prefix }}ipm"
+ipm_data_volume: "{{ docker_name_prefix }}ipm"
+ipm_port: 8888

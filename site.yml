@@ -1,0 +1,15 @@
+---
+- hosts: fullnode
+  gather_facts: true
+  become: true
+  become_method: sudo
+  roles:
+    # Run Distupgrade and reboot, reboot has to be forced with --extra-vars="reboot_for_upgrades=true"
+    - { role: ttsak.upgrade_reboot, tags: ['common', 'basic_install'] }
+    - { role: common, tags: ['common', 'basic_install'] }
+    - { role: ansible-role-pip, tags: ['docker', 'basic_install'] }
+    - { role: geerlingguy.docker, tags: ['docker', 'basic_install'] }
+    - { role: iri, tags: 'iri' }
+    - { role: ipm, tags: ['ipm', 'iri'] }
+    - { role: nginx, tags: ['ipm', 'nginx', 'iri'] }
+    - { role: nelson, tags: ['nelson', 'iri'] }

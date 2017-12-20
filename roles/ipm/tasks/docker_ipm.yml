@@ -1,0 +1,23 @@
+- name: Create an IPM data volume
+  docker_volume:
+    name: "{{ ipm_hostname }}"
+
+- name: Pull IPM image
+  docker_image:
+    name: "{{ ipm_image }}"
+
+- name: Create IOTA Peermanager container
+  docker_container:
+    name: "{{ ipm_hostname }}"
+    recreate: yes
+    image: "{{ ipm_image }}"
+    volumes:
+      - "{{ docker_name_prefix }}ipm:/home/ipm"
+    ports:
+      - "127.0.0.1:{{ ipm_port }}:8888/tcp"
+    networks:
+      - name: "{{ docker_network_name }}"
+    env:
+      API_PORT={{ iri_api_port }}
+      REFRESH=10s
+      IOTA_HOST="{{ iri_hostname }}"

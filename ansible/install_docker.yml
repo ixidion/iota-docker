@@ -1,5 +1,0 @@
-- hosts: dockerhosts
-
-  roles:
-    - ansible-role-pip
-    - geerlingguy.docker
