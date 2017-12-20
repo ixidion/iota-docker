@@ -4,4 +4,4 @@
 
 - name: Pull IRI image
   docker_image:
-    name: "{{ docker_image_ipm }}"
+    name: "{{ ipm_image }}"

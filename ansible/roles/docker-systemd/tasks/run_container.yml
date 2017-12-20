@@ -1,8 +1,8 @@
 - name: Create IRI container
   docker_container:
-    name: "{{ iota_host }}"
+    name: "{{ iri_hostname }}"
     recreate: yes
-    image: "{{ docker_image_iri }}"
+    image: "{{ iri_image }}"
     volumes:
       - "{{ docker_name_prefix }}iri_data:/opt/iri/data"
     ports:
@@ -12,13 +12,13 @@
     networks:
       - name: "{{ docker_network_name }}"
     env:
-      NEIGHBORS="{{ neighbors }}"
+      NEIGHBORS="{{ iri_neighbors }}"
 
 - name: Create IOTA Peermanager container
   docker_container:
     name: "{{ ipm_host }}"
     recreate: yes
-    image: "{{ docker_image_ipm }}"
+    image: "{{ ipm_image }}"
     volumes:
       - "{{ docker_name_prefix }}ipm:/home/ipm"
     ports:
@@ -28,13 +28,13 @@
     env:
       API_PORT=14265
       REFRESH=10s
-      IOTA_HOST="{{ iota_host }}"
+      iri_hostname="{{ iri_hostname }}"
 
 - name: Create nginx container as reverse proxy for ipm
   docker_container:
     name: "{{ nginx_host }}"
     recreate: yes
-    image: "{{ docker_image_nginx }}"
+    image: "{{ nginx_image }}"
     volumes:
       - "{{ nginx_volume }}:/etc/nginx/"
     ports:

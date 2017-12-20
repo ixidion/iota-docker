@@ -18,12 +18,12 @@
   when: setupdb == "true" and skipdbdl != "true"
 
 - name: Extract Tarball
-  shell: tar xfz /tmp/IOTA.partners-mainnetdb.tar.gz -C /var/lib/docker/volumes/{{ project_name }}_{{ iota_data_volume }}/_data/mainnetdb/
+  shell: tar xfz /tmp/IOTA.partners-mainnetdb.tar.gz -C /var/lib/docker/volumes/{{ project_name }}_{{ iri_data_volume }}/_data/mainnetdb/
   when: setupdb == "true"
 
 - name: Change/Fix Ownership
   file:
-    path: /var/lib/docker/volumes/{{ project_name }}_{{ iota_data_volume }}/_data/mainnetdb/
+    path: /var/lib/docker/volumes/{{ project_name }}_{{ iri_data_volume }}/_data/mainnetdb/
     owner: root
     group: root
     recurse: true
@@ -36,6 +36,6 @@
 - name: Setup a crontab to restart iri every x hours
   cron:
     name: Restart IRI
-    job: "docker container restart $(docker ps --filter \"name={{ iota_cron_filter }}\" -q)"
-    hour: "*/{{ iota_restart_every_x_hours }}"
-  when: iota_restart == true
+    job: "docker container restart $(docker ps --filter \"name={{ iri_cron_filter }}\" -q)"
+    hour: "*/{{ iri_cron_active_every_x_hours }}"
+  when: iri_cron_active == true

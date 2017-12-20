@@ -14,7 +14,7 @@ nelson_configdir: /etc/nelson
 nelson_datadir: /var/lib/nelson
 
 # IRI host on which to bind to IRI
-nelson_iri_host: "{{ iota_host }}"
+nelson_iri_host: "{{ iri_hostname }}"
 
 # Nelson bind API to this address
 nelson_bind_address: 127.0.0.1
