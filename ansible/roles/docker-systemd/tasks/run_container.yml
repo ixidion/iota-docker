@@ -13,7 +13,6 @@
       - name: "{{ docker_network_name }}"
     env:
       NEIGHBORS="{{ neighbors }}"
-      REMOTE_API_LIMIT=""
 
 - name: Create IOTA Peermanager container
   docker_container:
