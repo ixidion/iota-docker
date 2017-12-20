@@ -1,6 +1,6 @@
 - name: Create an IRI data volume
   docker_volume:
-    name: "{{ docker_name_prefix }}iri_data"
+    name: "{{ iota_data_volume }}"
 
 - name: Pull IRI image
   docker_image:

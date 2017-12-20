@@ -12,6 +12,8 @@
 
 
 # Create Nelson Container
+- import_tasks: docker_nelson.yml
+  tags: nelson
 
 # Run
 - import_tasks: run_container.yml

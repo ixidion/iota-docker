@@ -1,6 +1,6 @@
 - name: Create IRI container
   docker_container:
-    name: "{{ docker_name_prefix }}iri"
+    name: "{{ iota_host }}"
     recreate: yes
     image: "{{ docker_image_iri }}"
     volumes:
@@ -28,11 +28,11 @@
     env:
       API_PORT=14265
       REFRESH=10s
-      IOTA_HOST="{{ docker_name_prefix }}iri"
+      IOTA_HOST="{{ iota_host }}"
 
 - name: Create nginx container as reverse proxy for ipm
   docker_container:
-    name: "{{ docker_name_prefix }}_nginx"
+    name: "{{ nginx_host }}"
     recreate: yes
     image: "{{ docker_image_nginx }}"
     volumes:
@@ -41,3 +41,21 @@
       - "80:80/tcp"
     networks:
       - name: "{{ docker_network_name }}"
+
+- name: Create nelson container for managing peers
+  docker_container:
+    name: "{{ nelson_host }}"
+    recreate: yes
+    image: "{{ nelson_image }}"
+    volumes:
+      - "{{ nelson_volume }}:/etc/nelson"
+    ports:
+      - "16600:16600"
+      - "18600:18600"
+    networks:
+      - name: "{{ docker_network_name }}"
+    env:
+      NELSON_CONFIG="{{ nelson_configdir }}/config.ini"
+  tags:
+    - restart_nelson
+    - nelson
