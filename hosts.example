@@ -1,7 +1,9 @@
-[dockerhosts]
+[fullnode]
 # Works for Ubuntu
-<hostname> ansible_user=<user> ansible_become=true ansible_python_interpreter=/usr/bin/python3
+#<hostname> ansible_user=<user> ansible_become=true ansible_python_interpreter=/usr/bin/python3
 
-[iotanodes]
-# Works for Ubuntu
-<hostname> ansible_user=<user> ansible_become=true ansible_python_interpreter=/usr/bin/python3
+# Works for Centos
+#<hostname> ansible_user=<user> ansible_become=true
+
+# Example with initial nodes and Java Mem Settings
+#iota ansible_user=my_user ansible_become=true ansible_python_interpreter="/usr/bin/python3" extiri_java_options="-Xms2G -Xmx10G" iri_neighbors="tcp://qwertz.example:15600 udp://asdfg.example:14600"

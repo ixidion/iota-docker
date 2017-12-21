@@ -1,0 +1,1 @@
+# There is no need to open the firewall. It is intended that IPM is only accessible through a reverse proxy and not directly from outside.

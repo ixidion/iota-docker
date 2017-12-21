@@ -2,3 +2,4 @@ nginx_volume: "{{ docker_name_prefix }}nginx_conf"
 nginx_image: nginx:mainline
 nginx_hostname: "{{ docker_name_prefix }}nginx"
 nginx_port: 80
+nginx_user: nginx

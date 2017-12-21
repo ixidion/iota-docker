@@ -1,5 +1,7 @@
-- name: Update all packages
+- name: Upgrade all packages (debian)
   apt:
+    update_cache: yes
+    cache_valid_time: 3600
     upgrade: dist
 
 - name: Ensure depdencies are installed
@@ -13,3 +15,32 @@
     - curl
     - pv
     - python3-pip
+
+- name: ensure ufw started and default incoming policy denied
+  ufw:
+    state: enabled
+    direction: incoming
+    policy: deny
+
+- name: ufw default outgoing policy allowed
+  ufw:
+    direction: outgoing
+    policy: allow
+
+- name: allow ssh port in firewall
+  ufw:
+    rule: allow
+    direction: in
+    proto: tcp
+    port: "{{ ssh_port }}"
+
+- name: Check if a reboot is required (debian)
+  stat:
+    path: /var/run/reboot-required
+  register: reboot_file
+  check_mode: no
+
+- name: Set reboot_required (debian)
+  set_fact:
+    reboot_required: true
+  when: reboot_file.stat.exists
