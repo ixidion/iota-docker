@@ -34,7 +34,7 @@ ansible-playbook -i hosts --ask-become --extra-vars="reboot_for_upgrades=true" -
 
 ## Other useful run options
 Set fixed intial neighbors:
-```--extra-vars="iri_neighbors=tcp://xyz.example:15600 udp://127.0.0.1:14600"
+```--extra-vars="iri_neighbors=tcp://xyz.example:15600 udp://127.0.0.1:14600"```
 
 Skip the download of the DB from iota.partners ```--skip-tags "download_db"``` The DB has a few GB and it is not necessary to download it each time the node is recreated.
 
