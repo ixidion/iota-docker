@@ -12,3 +12,4 @@ iri_db_filename: IOTA.partners-mainnetdb.tar.gz
 iri_db_url: "http://db.iota.partners/{{ iri_db_filename }}"
 iri_db_folder: "{{ docker_volume_path }}{{ iri_data_volume }}/_data/mainnetdb"
 iri_java_options: "-XX:+DisableAttachMechanism -XX:+HeapDumpOnOutOfMemoryError -XX:+UnlockExperimentalVMOptions -XX:+UseCGroupMemoryLimitForHeap {{ extiri_java_options }}"
+iri_neighbors: ""

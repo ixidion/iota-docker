@@ -42,7 +42,7 @@ The following Tags are defined:
 * iri - Installation of IRI with download of DB by default.
 * download_db - Download of the IRI db from iota.partners and extraction to IRI folder.
 * ipm - Installs the [IOTA Peermanager](https://github.com/akashgoswami/ipm). It is bound to localhost by default.
-* nginx - Installs NGIX to reverse proxy IPM. TODO Implement htaccess. So not much function at the moment.
+* nginx - Installs nginx to reverse proxy IPM. TODO Implement htaccess. So not much function at the moment.
 * nelson - Installs [Nelson]() for automatic discovery and management of neighbors.
 
 ## Tips & Tricks

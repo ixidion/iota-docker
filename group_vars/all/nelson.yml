@@ -1,8 +1,5 @@
-# Nelson docker image tag to run
-nelson_tag: latest
-
 # Nelson image name
-nelson_image: romansemko/nelson
+nelson_image: romansemko/nelson:latest
 
 # User name under which to run nelson
 nelson_username: nelson
@@ -29,3 +26,5 @@ nelson_tcp_port: 16600
 nelson_volume: "{{ docker_name_prefix }}nelson_conf"
 
 nelson_hostname: "{{ docker_name_prefix }}nelson"
+
+nelson_master: false
