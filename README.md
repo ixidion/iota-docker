@@ -29,7 +29,7 @@ ansible-playbook -i hosts --ask-become sites.yml
 ```
 **Reboot**, like default but reboots the machine if needed
 ```
-ansible-playbook -i hosts --ask-become --extra-vars="reboot_for_upgrades=true" --extra-vars="iri_neighbors=tcp://vmi154313.contaboserver.net:15600 tcp://vmi154543.contaboserver.net:15600 tcp://miota.zapto.org:1339 tcp://vmi153897.contaboserver.net:15600 tcp://draugr.iotanodes.eu:15600 tcp://h2539110.stratoserver.net:15600 tcp://46.101.111.142:15600 tcp://node.your-iota.de:1337 udp://104.158.211.141:14701 tcp://euve259512.serverprofi24.de:15600 tcp://ec2-52-210-154-106.eu-west-1.compute.amazonaws.com:15600 tcp://185.206.144.75:15600" --skip-tags "download_db" sites.yml
+ansible-playbook -i hosts --ask-become --extra-vars="reboot_for_upgrades=true" --extra-vars="iri_neighbors=<neighbors here>" --skip-tags "download_db" sites.yml
 ```
 
 ## Other useful run options
