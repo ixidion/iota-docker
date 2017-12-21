@@ -47,6 +47,7 @@ The following Tags are defined:
 
 ## Tips & Tricks
 IPM, IRI (API) is only bound to localhost for security reasons. Setup an SSH tunneling.
+
 ```
 Host iota
         HostName <hostname>
