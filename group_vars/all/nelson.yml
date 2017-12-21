@@ -26,3 +26,5 @@ nelson_tcp_port: 16600
 nelson_volume: "{{ docker_name_prefix }}nelson_conf"
 
 nelson_hostname: "{{ docker_name_prefix }}nelson"
+
+nelson_master: false
