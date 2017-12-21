@@ -12,7 +12,7 @@ IOTA Peermanager [Dockerhub](https://hub.docker.com/r/ixidion/ipm/) [Github](htt
    1. Deny SSH root access
    1. Ensure that Python/Pip is installed
 1. Create a SSH-Key and copy it to the server with `ssh-copy-id`
-1. Installed version of ansible DEV(!) version, cause of a bug with docker plugins in regular version See [30239](https://github.com/ansible/ansible/issues/30239)
+1. Installed version of Ansible DEV(!), cause of a bug with docker plugins in regular version See [30239](https://github.com/ansible/ansible/issues/30239)
 ```
 pip install git+https://github.com/ansible/ansible.git@devel
 ```
