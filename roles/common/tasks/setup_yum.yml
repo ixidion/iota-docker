@@ -1,9 +1,15 @@
 - name: Install epel-release
   yum: state=latest name=epel-release
 
-- name: upgrade all packages
+# required for "needs-restarting"
+- name: Install yum-utils
   yum:
-    name: '*'
+    name: yum-utils
+    state: present
+
+- name: Upgrade all packages (redhat)
+  yum:
+    name: "*"
     state: latest
 
 - name: Install some packages
@@ -18,3 +24,15 @@
     - jq
     - pv
     - python-pip
+
+- name: Check if a reboot is required (redhat)
+  shell: needs-restarting -r
+  register: needs_restarting_cmd
+  check_mode: no
+  failed_when: false
+  changed_when: false
+
+- name: Set reboot_required (redhat)
+  set_fact:
+    reboot_required: true
+  when: needs_restarting_cmd.rc != 0

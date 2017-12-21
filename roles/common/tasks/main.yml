@@ -4,3 +4,28 @@
 
 - import_tasks: setup_yum.yml
   when: ansible_distribution == 'CentOS' or ansible_distribution == 'Red Hat Enterprise Linux'
+
+# Reboot after upgrades is disabled by default
+# To enable it you have to use --extra-vars="reboot_for_upgrades=true"
+- name: Reboot updated system
+  shell: sleep 2 && /sbin/shutdown -r now "Ansible system package upgraded"
+  async: 1
+  poll: 0
+  ignore_errors: true
+  when:
+    - reboot_for_upgrades
+    - reboot_required is defined and reboot_required == true
+
+- debug: msg="Please initiate a manual restart and run this script again."
+  when:
+    - reboot_for_upgrades == false
+    - reboot_required is defined and reboot_required == true
+
+- debug: msg="A restart is in progress. Wait for system restart and run this script again."
+  when:
+    - reboot_for_upgrades
+    - reboot_required is defined and reboot_required == true
+
+- meta: end_play
+  when:
+    - reboot_required is defined and reboot_required == true

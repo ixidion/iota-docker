@@ -3,5 +3,3 @@
 
 - src: geerlingguy.docker
   version: 2.1.0
-
-- src: ttsak.upgrade_reboot
