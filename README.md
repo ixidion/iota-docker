@@ -12,7 +12,7 @@ IOTA Peermanager [Dockerhub](https://hub.docker.com/r/ixidion/ipm/) [Github](htt
    1. Deny SSH root access
    1. Ensure that Python/Pip is installed
 1. Create a SSH-Key and copy it to the server with `ssh-copy-id`
-1. Installed version of ansible DEV(!) version, cause of a bug with docker plugins in regular version See [30239](https://github.com/ansible/ansible/issues/30239)
+1. Installed version of Ansible DEV(!), cause of a bug with docker plugins in regular version See [30239](https://github.com/ansible/ansible/issues/30239)
 ```
 pip install git+https://github.com/ansible/ansible.git@devel
 ```
@@ -57,8 +57,9 @@ Host iota
         AddKeysToAgent yes
         LocalForward 127.0.0.1:8888 127.0.0.1:8888
         LocalForward 127.0.0.1:14265 127.0.0.1:14265
-  ```
-  Then just run: ```ssh iota``` and point your browser to ```http://localhost:8888``` and your curl/Postman to ```localhost:14265```
+```
+
+Then just run: ```ssh iota``` and point your browser to ```http://localhost:8888``` and your curl/Postman to ```localhost:14265```
 
 # How to setup IOTA without Docker
 If Docker is not an option for you and want to install IOTA directly on bare metal or a VPS, then you should definitely checkout [IRI Playbook](https://github.com/nuriel77/iri-playbook).
