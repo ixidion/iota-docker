@@ -1,3 +1,7 @@
+- name: Create an docker network
+  docker_network:
+    name: "{{ docker_network_name }}"
+
 - name: Create an IRI data volume
   docker_volume:
     name: "{{ iri_data_volume }}"

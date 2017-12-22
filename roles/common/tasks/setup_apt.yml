@@ -32,7 +32,7 @@
     rule: allow
     direction: in
     proto: tcp
-    port: "{{ ansible_port }}"
+    port: "{{ ssh_port }}"
 
 - name: Check if a reboot is required (debian)
   stat:

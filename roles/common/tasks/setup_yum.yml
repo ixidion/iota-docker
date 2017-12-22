@@ -1,5 +1,7 @@
-- name: Install epel-release
-  yum: state=latest name=epel-release
+- name: Upgrade all packages (redhat)
+  yum:
+    name: "*"
+    state: latest
 
 # required for "needs-restarting"
 - name: Install yum-utils
@@ -7,10 +9,9 @@
     name: yum-utils
     state: present
 
-- name: Upgrade all packages (redhat)
-  yum:
-    name: "*"
-    state: latest
+- name: Add Extra Packages for Enterprise Linux (EPEL)
+  include_role:
+    name: "geerlingguy.repo-epel"
 
 - name: Install some packages
   yum: state=latest name={{ item }}
