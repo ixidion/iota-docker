@@ -1,1 +1,9 @@
 - import_tasks: docker_iri.yml
+
+- import_tasks: ufw.yml
+  when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
+  tags: firewall
+
+- import_tasks: firewalld.yml
+  when: ansible_distribution == 'CentOS' or ansible_distribution == 'Red Hat Enterprise Linux'
+  tags: firewall

@@ -25,6 +25,19 @@
     - pv
     - python-pip
 
+# Taken from https://github.com/nuriel77/iri-playbook/
+- name: ensure firewalld started and enabled
+  systemd:
+    name: firewalld
+    state: started
+    enabled: yes
+
+- name: ensure selinux enabled
+  selinux:
+    policy: targeted
+    state: enforcing
+  register: selinux_enabled
+
 - name: Check if a reboot is required (redhat)
   shell: needs-restarting -r
   register: needs_restarting_cmd
@@ -35,4 +48,23 @@
 - name: Set reboot_required (redhat)
   set_fact:
     reboot_required: true
-  when: needs_restarting_cmd.rc != 0
+  when:
+    - needs_restarting_cmd.rc != 0
+    - selinux_enabled is defined and selinux_enabled.changed
+
+- name: check selinux not disabled
+  shell: "getenforce"
+  changed_when: false
+  register: getenforce
+
+- name: exit and notify selinux not enabled
+  block:
+    - name: exit and notify selinux not enabled
+      debug:
+        msg: >
+             ** NOTE ** The system might require a reboot to get selinux enabled.
+                        Check /etc/sysconfig/selinux if selinux is `enforcing`.
+                        If it is, the host needs to be rebooted `shutdown -r now`.
+                        Refusing to continue.
+    - meta: end_play
+  when: "getenforce is defined and 'stdout' in getenforce and 'Disabled' in getenforce.stdout"
