@@ -16,6 +16,7 @@
     name: "{{ nginx_hostname }}"
     recreate: yes
     image: "{{ nginx_image }}"
+    user: "{{ nginx_user }}"
     volumes:
       - "{{ nginx_volume }}:/etc/nginx/"
     ports:
