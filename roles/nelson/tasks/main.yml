@@ -1,2 +1,3 @@
+- import_tasks: firewall.yml
 
 - import_tasks: docker_nelson.yml

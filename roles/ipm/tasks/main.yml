@@ -1,5 +1,4 @@
-
-- import_tasks: docker_ipm.yml
-
 - import_tasks: firewall.yml
   tags: ipm_firewall
+
+- import_tasks: docker_ipm.yml
