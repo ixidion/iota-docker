@@ -1,5 +1,5 @@
 # iota-docker
-This setup creates an IOTA full node with Docker based images. Other useful tools for monitoring and management are available as well.
+This setup creates an IOTA full node with Docker based images. Other useful tools like Nelson and IPM are installed as well, but can be skipped.
 
 At the moment the following docker images are used:
 IOTA Node [Dockerhub](https://hub.docker.com/r/bluedigits/iota-node/)
