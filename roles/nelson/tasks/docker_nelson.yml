@@ -27,8 +27,8 @@
     volumes:
       - "{{ nelson_volume }}:/etc/nelson"
     ports:
-      - "127.0.0.1:{{ nelson_tcp_port }}:16600"
-      - "{{ nelson_api_port }}:18600"
+      - "{{ nelson_tcp_port }}:16600"
+      - "127.0.0.1:{{ nelson_api_port }}:18600"
     networks:
       - name: "{{ docker_network_name }}"
     env:
