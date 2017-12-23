@@ -16,6 +16,13 @@
     - pv
     - python3-pip
 
+- name: allow ssh port in firewall
+  ufw:
+    rule: allow
+    direction: in
+    proto: tcp
+    port: "{{ ssh_port }}"
+
 - name: ensure ufw started and default incoming policy denied
   ufw:
     state: enabled
@@ -26,13 +33,6 @@
   ufw:
     direction: outgoing
     policy: allow
-
-- name: allow ssh port in firewall
-  ufw:
-    rule: allow
-    direction: in
-    proto: tcp
-    port: "{{ ssh_port }}"
 
 - name: Check if a reboot is required (debian)
   stat:

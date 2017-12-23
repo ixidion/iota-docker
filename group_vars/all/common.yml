@@ -1,2 +1,2 @@
 reboot_for_upgrades: false
-ssh_port: "{{ ansible_port }}"
+ssh_port: 22
