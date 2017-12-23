@@ -11,6 +11,13 @@
   docker_image:
     name: "{{ nginx_image }}"
 
+- name: copy systemd service file
+  template:
+    src: templates/nginx.systemd.j2
+    dest: "{{ systemd_dir }}/{{ nginx_hostname }}.service"
+  notify:
+    - reload systemd
+
 - name: Create nginx container as reverse proxy for ipm
   docker_container:
     name: "{{ nginx_hostname }}"
@@ -22,3 +29,12 @@
       - "80:80/tcp"
     networks:
       - name: "{{ docker_network_name }}"
+
+- name: flush handlers
+  meta: flush_handlers
+
+- name: ensure nginx is started and enabled in systemd
+  systemd:
+    name: "{{ nginx_hostname }}.service"
+    state: started
+    enabled: yes

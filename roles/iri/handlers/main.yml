@@ -1,0 +1,6 @@
+# Taken from https://github.com/SemkoDev/nelson.cli
+- name: restart iri
+  systemd:
+    name: "{{ iri_hostname }}.service"
+    state: restarted
+    enabled: yes

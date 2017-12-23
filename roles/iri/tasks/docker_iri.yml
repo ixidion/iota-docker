@@ -14,6 +14,13 @@
   docker_image:
     name: "{{ iri_image }}"
 
+- name: copy systemd service file
+  template:
+    src: templates/iri.systemd.j2
+    dest: "{{ systemd_dir }}/{{ iri_hostname }}.service"
+  notify:
+    - reload systemd
+
 - name: Create IRI container
   docker_container:
     name: "{{ iri_hostname }}"
@@ -33,10 +40,11 @@
       JAVA_OPTIONS="{{ iri_java_options }}"
       REMOTE_API_LIMIT=""
 
-# Needs to be replaced with systemd
-# - name: Setup a crontab to restart iri every x hours
-#   cron:
-#     name: Restart IRI
-#     job: "docker container restart $(docker ps --filter \"name={{ iri_hostname }}\" -q)"
-#     hour: "*/{{ iri_cron_every_x_hours }}"
-#   when: iri_cron_active == true
+- name: flush handlers
+  meta: flush_handlers
+
+- name: ensure iri is started and enabled in systemd
+  systemd:
+    name: "{{ iri_hostname }}.service"
+    state: started
+    enabled: yes

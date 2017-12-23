@@ -1,0 +1,4 @@
+# Taken from https://github.com/SemkoDev/nelson.cli
+- name: reload systemd
+  sudo: yes
+  command: systemctl daemon-reload

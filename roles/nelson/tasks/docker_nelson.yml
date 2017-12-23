@@ -11,6 +11,14 @@
     src: templates/config.ini.j2
     dest: "{{ docker_volume_path }}{{ nelson_volume }}/_data/config.ini"
 
+
+- name: copy systemd service file
+  template:
+    src: templates/nelson.systemd.j2
+    dest: "{{ systemd_dir }}/{{ nelson_hostname }}.service"
+  notify:
+    - reload systemd
+
 - name: Create nelson container for managing peers
   docker_container:
     name: "{{ nelson_hostname }}"
@@ -19,7 +27,7 @@
     volumes:
       - "{{ nelson_volume }}:/etc/nelson"
     ports:
-      - "{{ nelson_tcp_port }}:16600"
+      - "127.0.0.1:{{ nelson_tcp_port }}:16600"
       - "{{ nelson_api_port }}:18600"
     networks:
       - name: "{{ docker_network_name }}"
@@ -27,3 +35,12 @@
       NELSON_CONFIG="{{ nelson_configdir }}/config.ini"
   tags:
     - restart_nelson
+
+- name: flush handlers
+  meta: flush_handlers
+
+- name: ensure nelson is started and enabled in systemd
+  systemd:
+    name: "{{ nelson_hostname }}.service"
+    state: started
+    enabled: yes

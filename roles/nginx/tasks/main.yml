@@ -1,2 +1,4 @@
+- import_role:
+    name: essentials
 
 - import_tasks: docker_nginx.yml

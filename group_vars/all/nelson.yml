@@ -14,7 +14,7 @@ nelson_datadir: /var/lib/nelson
 nelson_iri_host: "{{ iri_hostname }}"
 
 # Nelson bind API to this address
-nelson_bind_address: 127.0.0.1
+nelson_bind_address: 0.0.0.0
 
 # Nelson API port
 nelson_api_port: 18600

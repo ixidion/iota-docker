@@ -6,6 +6,13 @@
   docker_image:
     name: "{{ ipm_image }}"
 
+- name: copy systemd service file
+  template:
+    src: templates/ipm.systemd.j2
+    dest: "{{ systemd_dir }}/{{ ipm_hostname }}.service"
+  notify:
+    - reload systemd
+
 - name: Create IOTA Peermanager container
   docker_container:
     name: "{{ ipm_hostname }}"
@@ -21,3 +28,12 @@
       API_PORT={{ iri_api_port }}
       REFRESH=10s
       IOTA_HOST="{{ iri_hostname }}"
+
+- name: flush handlers
+  meta: flush_handlers
+
+- name: ensure ipm is started and enabled in systemd
+  systemd:
+    name: "{{ ipm_hostname }}.service"
+    state: started
+    enabled: yes
