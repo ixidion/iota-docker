@@ -1,10 +1,29 @@
-- name: Download current Mainnet DB of IOTA
-  get_url:
-    url: "{{ iri_db_url }}"
-    dest: /tmp/
+
+- name: "Download current IOTA Database (resume: yes). This can take up to half an hour. You can skip this step with: --skip-tags=\"download_db\""
+  shell: "export ec=18; while [ $ec -eq 18 ]; do /usr/bin/curl -O -C - {{ iri_db_url }}; export ec=$?; done"
+  args:
+    chdir: /tmp/
+
+- name: Create directory
+  file:
+    path: "{{ iri_db_folder }}"
+    owner: "{{ iri_user }}"
+    group: "{{ iri_group }}"
+    state: directory
+
+- name: stop iri before db update
+  systemd:
+    name: "{{ iri_hostname }}.service"
+    state: stopped
+    enabled: yes
 
 - name: Extract Tarball
   shell: tar xfz /tmp/{{ iri_db_filename }} -C {{ iri_db_folder }}
+
+- name: Clean file
+  file:
+    state: absent
+    path: "/tmp/{{ iri_db_filename }}"
 
 - name: Change/Fix Ownership
   file:

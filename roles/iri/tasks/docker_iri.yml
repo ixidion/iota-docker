@@ -1,14 +1,14 @@
-- name: Create an docker network
+- name: Create docker network
   docker_network:
     name: "{{ docker_network_name }}"
 
 - name: Create an IRI data volume
   docker_volume:
     name: "{{ iri_data_volume }}"
-# DB Download disabled, cause of errors. Need to investigate this.
-# - import_tasks: database.yml
-#   tags:
-#     - download_db
+
+- import_tasks: database.yml
+  tags:
+    - download_db
 
 - name: Pull IRI image
   docker_image:
