@@ -7,6 +7,11 @@
     src: templates/nginx.conf.j2
     dest: "{{ docker_volume_path }}{{ nginx_volume }}/_data/nginx.conf"
 
+- name: copy htaccess
+  template:
+    src: templates/htaccess.j2
+    dest: "{{ docker_volume_path }}{{ nginx_volume }}/_data/.htpasswd"
+
 - name: Pull nginx image
   docker_image:
     name: "{{ nginx_image }}"

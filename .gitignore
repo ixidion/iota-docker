@@ -1,3 +1,4 @@
 hosts
 *.retry
 iri_neighbors.yml
+secret*

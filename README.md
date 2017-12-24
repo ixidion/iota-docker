@@ -23,13 +23,14 @@ pip install git+https://github.com/ansible/ansible.git@devel
 ```
 ansible-galaxy -f -r dependencies.yml
 ```
+1. Create the Passwordfile for nginx. Run ```./create_password.sh```
 1. Usage examples: **Default** Setup the node with defaults. Manual reboot is normally required after installing.
 ```
-ansible-playbook -i hosts --ask-become sites.yml
+ansible-playbook -K -i hosts --vault-id="secret" site.yml
 ```
 **Reboot**, like default but reboots the machine if needed
 ```
-ansible-playbook -i hosts --ask-become --extra-vars="reboot_for_upgrades=true" --extra-vars="iri_neighbors=<neighbors here>" --skip-tags "download_db" sites.yml
+ansible-playbook -K -i hosts --vault-id="secret" --extra-vars="reboot_for_upgrades=true" --extra-vars="iri_neighbors=<neighbors here>" --skip-tags "download_db" site.yml
 ```
 
 ## Other useful run options

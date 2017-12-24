@@ -11,5 +11,5 @@
     - { role: geerlingguy.docker, tags: ['docker', 'basic_install'] }
     - { role: iri, tags: 'iri' }
     - { role: ipm, tags: ['ipm'] }
-    - { role: nginx, tags: ['ipm'] }
+    - { role: nginx, tags: ['nginx'] }
     - { role: nelson, tags: ['nelson'] }

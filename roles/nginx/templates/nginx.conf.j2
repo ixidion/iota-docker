@@ -13,7 +13,7 @@ http {
     listen 80;
 
     auth_basic "IOTA Peermanager Panel";
-    auth_basic_user_file conf/.htpasswd;
+    auth_basic_user_file /etc/nginx/.htpasswd;
 
     location / {
         proxy_pass http://{{ ipm_hostname }}:{{ ipm_port }};
@@ -27,6 +27,4 @@ http {
   log_format  main  '$remote_addr - $remote_user [$time_local] "$request" '
                       '$status $body_bytes_sent "$http_referer" '
                       '"$http_user_agent" "$http_x_forwarded_for"';
-
-  access_log  /var/log/nginx/access.log  main;
 }
