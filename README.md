@@ -18,17 +18,17 @@ pip install git+https://github.com/ansible/ansible.git@devel
 ```
 
 # Run the playbook
-1. Adjust hosts.example, rename it to hosts and configure your hosts.
-1. Resolve ansible dependencies
+* Adjust hosts.example, rename it to `hosts` and configure your servers.
+* Resolve ansible dependencies
 ```
 ansible-galaxy -f -r dependencies.yml
 ```
-1. Create the Passwordfile for nginx. Run ```./create_password.sh```
-1. Usage examples: **Default** Setup the node with defaults. Manual reboot is normally required after installing.
+* Create the Passwordfile for nginx. Run ```./create_password.sh```
+* Usage examples: **Default** Setup the node with defaults. Manual reboot is normally required after installing.
 ```
 ansible-playbook -K -i hosts --vault-id="secret" site.yml
 ```
-**Reboot**, like default but reboots the machine if needed
+**Reboot**, behaves like default-setup, but reboots the machine if needed
 ```
 ansible-playbook -K -i hosts --vault-id="secret" --extra-vars="reboot_for_upgrades=true" --extra-vars="iri_neighbors=<neighbors here>" --skip-tags "download_db" site.yml
 ```
