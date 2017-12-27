@@ -2,8 +2,10 @@
 This setup creates an IOTA full node with Docker based images. Other useful tools like Nelson and IPM are installed as well, but can be skipped.
 
 At the moment the following docker images are used:
-IOTA Node [Dockerhub](https://hub.docker.com/r/bluedigits/iota-node/)
+IOTA Node [Dockerhub](hhttps://hub.docker.com/r/rootlogin/iota-iri/) [Github](https://github.com/chrootLogin/iota-iri)
 IOTA Peermanager [Dockerhub](https://hub.docker.com/r/ixidion/ipm/) [Github](https://github.com/akashgoswami/ipm)
+Nelson [Dockerhub](https://hub.docker.com/r/romansemko/nelson.cli/) [Github](https://github.com/SemkoDev/nelson.cli)
+nginx alpine (official image) [Docker](https://hub.docker.com/_/nginx/)
 
 # Prerequisites
 1. Setup a Server/VPS
