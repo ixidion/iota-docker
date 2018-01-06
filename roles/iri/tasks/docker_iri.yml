@@ -13,6 +13,7 @@
 - name: Pull IRI image
   docker_image:
     name: "{{ iri_image }}"
+    force: yes
 
 - name: copy systemd service file
   template:

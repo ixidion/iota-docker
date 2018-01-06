@@ -5,6 +5,7 @@
 - name: Pull IPM image
   docker_image:
     name: "{{ ipm_image }}"
+    force: yes
 
 - name: copy systemd service file
   template:

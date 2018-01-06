@@ -5,6 +5,7 @@
 - name: Pull Nelson image
   docker_image:
     name: "{{ nelson_image }}"
+    force: yes
 
 - name: copy config.ini
   template:
