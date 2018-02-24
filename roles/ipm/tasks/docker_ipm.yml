@@ -5,6 +5,12 @@
 - name: Pull IPM image
   docker_image:
     name: "{{ ipm_image }}"
+    state: absent
+    force: yes
+
+- name: Pull IPM image
+  docker_image:
+    name: "{{ ipm_image }}"
     force: yes
 
 - name: copy systemd service file

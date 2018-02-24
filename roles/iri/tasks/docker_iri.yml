@@ -10,6 +10,12 @@
   tags:
     - download_db
 
+- name: Remove old IRI image
+  docker_image:
+    name: "{{ iri_image }}"
+    state: absent
+    force: yes
+
 - name: Pull IRI image
   docker_image:
     name: "{{ iri_image }}"

@@ -2,6 +2,12 @@
   docker_volume:
     name: "{{ nelson_volume }}"
 
+- name: Remove old Nelson image
+  docker_image:
+    name: "{{ nelson_image }}"
+    state: absent
+    force: yes
+
 - name: Pull Nelson image
   docker_image:
     name: "{{ nelson_image }}"

@@ -12,9 +12,17 @@
     src: templates/htaccess.j2
     dest: "{{ docker_volume_path }}{{ nginx_volume }}/_data/.htpasswd"
 
+- name: Remove old nginx image
+  docker_image:
+    name: "{{ nginx_image }}"
+    state: absent
+    force: yes
+
+
 - name: Pull nginx image
   docker_image:
     name: "{{ nginx_image }}"
+    force: yes
 
 - name: copy systemd service file
   template:
