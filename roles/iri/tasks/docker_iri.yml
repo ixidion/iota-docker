@@ -10,15 +10,15 @@
   tags:
     - download_db
 
-- name: Remove old IRI image
-  docker_image:
-    name: "{{ iri_image }}"
-    state: absent
-    force: yes
+- name: Clone Repo
+  git:
+    repo: "{{ iri_repo_url }}"
+    dest: "{{ iri_build_path }}"
 
-- name: Pull IRI image
+- name: Build IRI image
   docker_image:
     name: "{{ iri_image }}"
+    path: "{{ iri_build_path }}"
     force: yes
 
 - name: copy systemd service file

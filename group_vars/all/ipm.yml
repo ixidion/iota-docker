@@ -1,4 +1,6 @@
 ipm_image: ixidion/ipm
+ipm_repo_url: "https://github.com/ixidion/ipm.git"
+ipm_build_path: "/tmp/ipm/"
 ipm_hostname: "{{ docker_name_prefix }}ipm"
 ipm_data_volume: "{{ docker_name_prefix }}ipm"
 ipm_port: 8888

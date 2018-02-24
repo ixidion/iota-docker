@@ -2,15 +2,15 @@
   docker_volume:
     name: "{{ ipm_hostname }}"
 
-- name: Pull IPM image
-  docker_image:
-    name: "{{ ipm_image }}"
-    state: absent
-    force: yes
+- name: Clone Repo
+  git:
+    repo: "{{ ipm_repo_url }}"
+    dest: "{{ ipm_build_path }}"
 
-- name: Pull IPM image
+- name: Build IPM image
   docker_image:
     name: "{{ ipm_image }}"
+    path: "{{ ipm_build_path }}/docker"
     force: yes
 
 - name: copy systemd service file

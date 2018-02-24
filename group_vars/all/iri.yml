@@ -3,6 +3,8 @@ iri_cron_active: false
 iri_cron_every_x_hours: 6
 iri_hostname: "{{ docker_name_prefix }}iri"
 iri_image: rootlogin/iota-iri
+iri_repo_url: "https://github.com/chrootLogin/iota-iri.git"
+iri_build_path: "/tmp/iri/"
 iri_api_port: 14265
 iri_tcp_port: 15600
 iri_udp_port: 14600
